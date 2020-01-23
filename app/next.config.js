@@ -1,7 +1,7 @@
-const { distDir } = require('../config');
+const { distDir } = require('../server/config');
 
 module.exports = {
-    distDir: `./dist/www`,
+    distDir: `../${distDir}/www`,
 
     webpack: (config, { isServer }) => {
         // Fixes npm packages that depend on `fs` module

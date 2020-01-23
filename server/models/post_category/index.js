@@ -1,4 +1,4 @@
-const { keystone }  = require('../../index');
+const { keystone }  = require('../../../index');
 const {Text, Checkbox, Password} = require('@keystonejs/fields');
 
 

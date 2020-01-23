@@ -7,8 +7,8 @@ const {MongooseAdapter} = require('@keystonejs/adapter-mongoose');
 
 const { StaticApp } = require('@keystonejs/app-static');
 
-const { staticRoute, staticPath} = require('./config');
-const { User, Post, PostCategory, Comment } = require('./models/schema');
+const { staticRoute, staticPath} = require('./server/config');
+const { User, Post, PostCategory, Comment } = require('./server/models/schema');
 
 const PROJECT_NAME = "keystone-next";
 
@@ -44,8 +44,9 @@ keystone.createList('Comment', Comment);
 
 const adminApp = new AdminUIApp({
     adminPath: '/admin',
-    hooks: require.resolve('./admin/'),
+    hooks: require.resolve('./server/admin/'),
     authStrategy,
+    // enableDefaultRoute: false,
     isAccessAllowed: ({ authentication: { item: user } }) => !!user && !!user.isAdmin,
 });
 
@@ -55,6 +56,6 @@ module.exports = {
         new GraphQLApp(),
         new StaticApp({ path: staticRoute, src: staticPath }),
         adminApp,
-        // new NextApp({ dir: 'app' }),
+        new NextApp({ dir: 'app' }),
     ]
 };
